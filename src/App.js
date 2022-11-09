@@ -1,41 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
-import {Card, Col, Row, Button, Container} from "react-bootstrap";
+import {Card, Col, Row, Button, Container, Breadcrumb} from "react-bootstrap";
 
-function App() {
+function App({tasks}) {
   return (
     <Container>
+      <Breadcrumb>
+        <Breadcrumb.Item active>Tasks</Breadcrumb.Item>
+      </Breadcrumb>
       <Row>
-        <Col>
+      {tasks.map(item => {
+       return <Col>
           <Card>
-            <Card.Img variant="top" src="/img/1.png" />
+            {item.image ? <Card.Img variant="top" src={`img/${item.image}`} /> : null}
             <Card.Body>
-              <Card.Title>Test</Card.Title>
-              <Card.Text>Kek</Card.Text>
-              <Button variant="primary">Тест</Button>
+              <Card.Title>{item.title}</Card.Title>
+              <Card.Text>{item.description}</Card.Text>
+              <Button variant="primary" href={`item/${item.id}`}>Перейти</Button>
             </Card.Body>
           </Card>
         </Col>
-        <Col>
-          <Card>
-            <Card.Img variant="top" src="/img/1.png" />
-            <Card.Body>
-              <Card.Title>Test</Card.Title>
-              <Card.Text>Kek</Card.Text>
-              <Button variant="primary">Тест</Button>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col>
-          <Card>
-            <Card.Img variant="top" src="/img/1.png" />
-            <Card.Body>
-              <Card.Title>Test</Card.Title>
-              <Card.Text>Kek</Card.Text>
-              <Button variant="primary">Тест</Button>
-            </Card.Body>
-          </Card>
-        </Col>
+      })}
       </Row>
     </Container>
   );
